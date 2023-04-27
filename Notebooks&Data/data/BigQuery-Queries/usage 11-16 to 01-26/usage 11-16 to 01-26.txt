@@ -1,0 +1,7 @@
+SELECT timestamp, gas_limit, gas_used
+FROM
+  `bigquery-public-data.crypto_ethereum.blocks`
+WHERE
+  DATE(timestamp) between  "2021-11-26"  AND "2022-01-26"
+
+ORDER BY timestamp DESC 

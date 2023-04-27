@@ -1,0 +1,4 @@
+SELECT  block_timestamp , is_erc20, is_erc721
+FROM `bigquery-public-data.crypto_ethereum.contracts` 
+where DATE(block_timestamp) BETWEEN "2021-11-26" AND "2022-05-21"
+order by block_timestamp desc

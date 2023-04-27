@@ -1,0 +1,8 @@
+SELECT t0.avg_gas_price, t0.block_timestamp, t0.max_gas_price, t0.min_gas_price FROM (SELECT
+  block_timestamp, MIN(gas_price) as min_gas_price, MAX(gas_price) as max_gas_price, AVG(gas_price) as avg_gas_price
+FROM
+  `bigquery-public-data.crypto_ethereum.transactions`
+WHERE
+  DATE(block_timestamp) between  "2021-11-26"  AND "2022-05-26"
+GROUP BY block_timestamp) AS t0
+ORDER BY block_timestamp DESC 

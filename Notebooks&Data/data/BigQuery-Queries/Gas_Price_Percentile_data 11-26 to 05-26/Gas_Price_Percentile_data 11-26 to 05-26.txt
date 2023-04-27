@@ -1,0 +1,23 @@
+select
+  percentiles[offset(0)] as block_gas_0th_percentile,
+  percentiles[offset(5)] as block_gas_5th_percentile,
+  percentiles[offset(10)] as block_gas_10th_percentile,
+  percentiles[offset(20)] as block_gas_20th_percentile,
+  percentiles[offset(30)] as block_gas_30th_percentile,
+  percentiles[offset(40)] as block_gas_40th_percentile,
+  percentiles[offset(50)] as block_gas_50th_percentile,
+  percentiles[offset(60)] as block_gas_60th_percentile,
+  percentiles[offset(70)] as block_gas_70th_percentile,
+  percentiles[offset(80)] as block_gas_80th_percentile,
+  percentiles[offset(90)] as block_gas_90th_percentile,
+  percentiles[offset(95)] as block_gas_95th_percentile,
+  percentiles[offset(100)] as block_gas_100th_percentile,
+  block_timestamp
+
+FROM
+(select block_timestamp, approx_quantiles(gas_price, 100) percentiles
+  from `bigquery-public-data.crypto_ethereum.transactions`
+WHERE
+  DATE(block_timestamp) between  "2021-11-26"  AND "2022-05-26"
+GROUP BY block_timestamp ) ORDER BY block_timestamp DESC
+;
